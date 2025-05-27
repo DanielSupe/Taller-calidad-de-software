@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inventory Management</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<h1>Inventory Management</h1>
+
+<section>
+    <h2>Devices</h2>
+    <div id="deviceMessage"></div>
+    <div>
+        <input type="text" id="deviceName" placeholder="Device Name" />
+        <input type="text" id="deviceType" placeholder="Device Type" />
+        <input type="text" id="deviceLocation" placeholder="Device Location" />
+        <button id="addDeviceBtn">Add Device</button>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th><th>Name</th><th>Type</th><th>Location</th><th>Status</th><th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="devicesTableBody"></tbody>
+    </table>
+</section>
+
+<section>
+    <h2>Loans</h2>
+    <div id="loanMessage"></div>
+    <div>
+        <select id="loanDeviceSelect"></select>
+        <input type="text" id="loanBorrowedBy" placeholder="Borrower Name" />
+        <button id="addLoanBtn">Add Loan</button>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th><th>Device ID</th><th>Borrowed By</th><th>Start Date</th><th>End Date</th><th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="loansTableBody"></tbody>
+    </table>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
