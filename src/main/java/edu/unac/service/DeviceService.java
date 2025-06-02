@@ -15,24 +15,42 @@ public class DeviceService {
     private DeviceRepository deviceRepository;
 
     public DeviceService(DeviceRepository deviceRepository) {
+        this.deviceRepository = deviceRepository;
     }
 
     public Device registerDevice(Device device) {
-        return null;
+        if (device.getName() == null || device.getName().length() < 3) {
+            throw new IllegalArgumentException("Device name must be at least 3 characters long");
+        }
+
+        device.setStatus(DeviceStatus.AVAILABLE);
+        device.setAddedDate(System.currentTimeMillis());
+
+        return deviceRepository.save(device);
     }
 
     public List<Device> getAllDevices() {
-        return null;
+        return deviceRepository.findAll();
     }
 
     public Optional<Device> getDeviceById(Long id) {
-        return null;
+        return deviceRepository.findById(id);
     }
 
     public Device updateDeviceStatus(Long id, DeviceStatus newStatus) {
-        return null;
+        Device device = deviceRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("Device not found"));
+
+        device.setStatus(newStatus);
+
+        return deviceRepository.save(device);
     }
 
     public void deleteDevice(Long id) {
+        if (deviceRepository.existsLoanByDeviceId(id)) {
+            throw new IllegalStateException("Cannot delete device with loan history");
+        }
+
+        deviceRepository.deleteById(id);
     }
 }
